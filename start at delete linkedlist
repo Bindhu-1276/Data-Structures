@@ -1,0 +1,72 @@
+/// deleteing the linkedlist at starting position ///
+
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+void printlist(struct node *ptr)
+{
+    while(ptr!=NULL)
+    {
+        printf("%d",ptr->data);
+        ptr =ptr->next;
+    }
+    printf("\n");
+}
+struct node *head,*tail = NULL;
+void creatlist(int data)
+{
+    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data =data;
+    newnode->next=NULL;
+    if(head==NULL)
+    {
+        head = newnode;
+        tail = newnode;
+    }
+    else
+    {
+        tail->next = newnode;
+        tail = newnode;
+    }
+}
+void deletestart()
+{
+    struct node *newnode=head;
+    if(head == NULL)
+    {
+        printf("list is empty.nothing to delete");
+        return;
+    }else{
+        newnode=newnode->next;
+        head=newnode;
+    }
+}
+int main(){
+    int n,i;
+    printf("enter the size:");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        int temp;
+        scanf("%d",&temp);
+        creatlist(temp);
+    }
+    int pos;
+    printf("enter the position:");
+    scanf("%d",&pos);
+    if(pos == 1)
+    {
+        deletestart();
+        printf("list after deleting the first node:");
+        printlist(head);
+    }
+    else
+    {
+        printf("invalid position;");
+    }
+    printf("\n");
+}
