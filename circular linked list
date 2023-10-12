@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *head ,*tail;
+void printlist(struct node *ptr)
+{
+    struct node *head = ptr;
+    struct node *current = ptr;
+    while(current->next!=head)  // this will print before tail
+    {
+        printf(" data is %5d\t ",current->data);
+        printf("%1d\t is current->next",current->next);
+        printf("%1d is current",current);
+        printf("\n");
+        current = current->next;
+    }
+    printf("data is %5d\t",current->data);
+    printf("%1d\t is current->next",current->next);
+    printf("%1d\t is current",current);
+}
+void createlist(int data)
+{
+   struct node *newnode=(struct node *)malloc(sizeof(struct node));
+   newnode -> data = data;
+   newnode -> next = NULL;
+   if(head == NULL)
+   {
+       head = newnode;
+       tail = newnode;
+   }
+   else
+   {
+       tail->next = newnode;
+       newnode->next=head; //creating the link between tail->next to head
+       tail=newnode;  // creating the circular linked list
+   }
+}
+int main()
+{
+    int n , i;
+    printf("enter the size:");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        int x;
+        scanf("%d",&x);
+        createlist(x);
+    }
+    printlist(head);
+    return 0;
+}
